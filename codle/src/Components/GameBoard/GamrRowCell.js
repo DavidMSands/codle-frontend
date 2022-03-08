@@ -2,7 +2,7 @@ import React from 'react'
 
 function GamrRowCell() {
   return (
-    <div>GamrRowCell</div>
+    <div></div>
   )
 }
 
