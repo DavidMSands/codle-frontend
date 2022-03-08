@@ -51,3 +51,7 @@
 #key-backspace {
     flex: 2;
 }
+
+.suggested-off {
+    background-color: #404041;
+}
