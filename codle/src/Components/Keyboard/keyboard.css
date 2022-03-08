@@ -50,6 +50,7 @@
 
 #key-backspace {
     flex: 2;
+    font-size: 125%;
 }
 
 .suggested-off {

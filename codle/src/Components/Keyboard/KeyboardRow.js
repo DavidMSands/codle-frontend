@@ -5,6 +5,7 @@ function KeyboardRow( { keys, onKeyboardClick } ) {
 
     function handleClick(e) {
         onKeyboardClick(e.target.name)
+        // onKeyboardClick(e.target)
     }
   return (
     keys.map((eachKey) => (
