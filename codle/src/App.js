@@ -36,14 +36,9 @@ function App() {
     enterGuess(keyClicked)
   }
   const enterGuess = (keyClicked) => {
-    //this is the divert to publish or delete
     if (keyClicked === "enter") {
-      const validWord = wordOfTheDay //TODO: come back to get word of the day from fetch
-      console.log(Array.isArray(validWord))
-        if (Array.isArray(validWord)) {
-          // submit()
-          console.log(keyClicked)
-        }
+      //potential TODO: validate users words before submitting in backen
+      submit()
     } else if (keyClicked.toLowerCase() === "backspace") {
       erase() 
     } else if (keyClicked.toLowerCase() !== "enter") {
@@ -84,35 +79,48 @@ function App() {
   }
 
   const submit = () => {
-    console.log(markers)
     const currentRound = round.current
     const updatedMarkers = {...markers}
     const tempWord = wordOfTheDay.split("")
+    const leftOverIndices = []
 
     // mark correct values and index with green
     tempWord.forEach((letter, index) => {
-      const guessedLetter = guesses[round][index]
+      const guessedLetter = guesses[currentRound][index]
 
       if (guessedLetter === letter) {
-        updatedMarkers[round][index] = "green"
-        tempWord[index] = "" //test what this is doing
+        updatedMarkers[currentRound][index] = "#6aaa64"
+        tempWord[index] = "" //empty index before each iteration
+      } else {
+        leftOverIndices.push(index)
       }
     })
 
     // mark correct values with wrong index in yellow
-    tempWord.forEach((letter, index) => {
-      const guessedLetter = guesses[round][index]
+    if (leftOverIndices.length) {
+      leftOverIndices.forEach(index => {
+        const guessedLetter = guesses[currentRound][index]
+        const correctLetterPosition = tempWord.indexOf(guessedLetter)
 
-      if (tempWord.includes(guessedLetter) && index !== tempWord.index(guessedLetter)) {
-        updatedMarkers[round][index] = "yellow"
-        tempWord[tempWord.indexOf(guessedLetter)] = "" //test what this does
-      }
-    })
+        if (tempWord.includes(guessedLetter) && correctLetterPosition !== index) {
+          updatedMarkers[currentRound][index] = "#e4bc3f"
+          tempWord[correctLetterPosition] = ""
+        } else {
+          updatedMarkers[currentRound][index] = "#808080"
+          tempWord[index] = ""
+        }
+      })
+    }
 
     setMarkers(updatedMarkers)
+    // console.log(markers[gameRound][letterIndex])
+
+    // console.log(guesses[round][index])
     round.current = currentRound + 1
-    console.log(markers)
+    letterIndex.current = 0
   }
+
+  console.log(markers)
 
 // LEFT OFF POINT: we need to pass down color as a prop to GameBoard so tile has access
 // We may need to access index in addition to color
@@ -121,7 +129,7 @@ function App() {
     <div className="App">
       <Header />
       <button onClick={hideScore}>Hide</button>
-      <GameBoard guesses={guesses} color={markers[round][index]}/>
+      <GameBoard guesses={guesses} colors={markers}/>
       {hide ? <Score /> : null }
       <Keyboard pressedKey={pressedKey} /> 
       <Footer /> 

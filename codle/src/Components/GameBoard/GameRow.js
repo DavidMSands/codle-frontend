@@ -11,12 +11,12 @@ const hard = [1, 2, 3, 4, 5, 6]
 const rows = [0, 1, 2, 3, 4, 5]
 
 
-function GameRow( { word } ) {
+function GameRow( { word, colors, roundIndex} ) {
   const [level, setLevel] = useState(medium)
-
+  // console.log(colors)
   return (
     <div className='tile'>
-      {word.map((letter, i) => <Tile key={i} letter={letter} color={color}/>)}
+      {word.map((letter, i) => <Tile key={i} letter={letter} colors={colors} roundIndex={roundIndex} letterIndex={i}/>)}
     </div>
   )
 }
