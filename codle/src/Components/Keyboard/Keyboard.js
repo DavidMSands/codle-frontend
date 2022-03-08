@@ -4,9 +4,10 @@ import KeyboardSuggestions from './KeyboardSuggestions'
 import "./keyboard.css"
 
 
-function Keyboard( {} ) {
+function Keyboard( { pressedKey } ) {
+
   function handleClick(keyClicked){
-    console.log(keyClicked)
+    pressedKey(keyClicked)
   }
 
   const keyboardRows = [
@@ -20,7 +21,7 @@ function Keyboard( {} ) {
   useEffect(() => {
     const handleKeyUp = (e) => {
       if (allKeys.includes(e.key)) {
-        console.log(e.key);
+        handleClick(e.key);
       }
     };
 
