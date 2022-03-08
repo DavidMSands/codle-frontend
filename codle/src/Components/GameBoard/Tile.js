@@ -14,9 +14,11 @@ const StyledTileDiv = styled.div`
     text-transform: uppercase;
 `
 
-function Tile() {
+function Tile( { letter } ) {
   return (
-    <StyledTileDiv></StyledTileDiv>
+    <StyledTileDiv>
+      {letter}
+    </StyledTileDiv>
   )
 }
 

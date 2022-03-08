@@ -2,12 +2,13 @@ import React from 'react'
 
 import GameRow from './GameRow'
 
-function TileContainer() {
-  const rows = [0, 1, 2, 3, 4, 5]
-
+function TileContainer( { guesses } ) {
+// debugger
   return (
     <div className='tile-container'>
-      {rows.map(i => <GameRow key={i}></GameRow>)}
+      {Object.values(guesses).map((word, i) => (
+        <GameRow key={i} word={word}/>
+    ))}
     </div>
   )
 }
