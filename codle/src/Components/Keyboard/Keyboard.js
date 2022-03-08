@@ -1,13 +1,36 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import KeyboardRows from "./KeyboardRows"
+import KeyboardSuggestions from './KeyboardSuggestions'
 import "./keyboard.css"
 
 
 function Keyboard( {} ) {
-
-  function handleClick(keyClicked) {
+  function handleClick(keyClicked){
     console.log(keyClicked)
   }
+
+  const keyboardRows = [
+    ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+    ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+    ["enter", "z", "x", "c", "v", "b", "n", "m", "backspace"],
+  ];
+
+  const allKeys = keyboardRows.flat()
+
+  useEffect(() => {
+    const handleKeyUp = (e) => {
+      if (allKeys.includes(e.key)) {
+        console.log(e.key);
+      }
+    };
+
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
+
 
   return (
     <KeyboardRows onKeyboardClick={handleClick}/>

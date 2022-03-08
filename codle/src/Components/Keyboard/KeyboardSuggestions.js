@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 
-letters = ["e", "l", "y"]
+const letters = ["e", "l", "y"]
 
-function SuggestOff( {letters} ) {
+function KeyboardSuggestions( {letters} ) {
 
     const [badLetters, setBadLetters] = useState([])
     //another state for correct letters and correct correct letters
@@ -20,4 +20,4 @@ function SuggestOff( {letters} ) {
   )
 }
 
-export default SuggestOff
+export default KeyboardSuggestions
