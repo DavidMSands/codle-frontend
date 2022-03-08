@@ -10,3 +10,29 @@
   max-width: 500px;
   margin: 0 auto;
 }
+
+/* gameboard */
+.gameboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.tile-container {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  grid-gap: 5px;
+
+  height: 420px;
+  width: 350px;
+}
+
+.tile {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 5px;
+}
+
+
