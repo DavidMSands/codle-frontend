@@ -1,12 +1,12 @@
 import React from 'react'
 import KeyboardKey from './KeyboardKey'
 //take in the keys from each row and map them out to individual divs
-function KeyboardRow( { keys, onKeyboardClick } ) {
+function KeyboardKeySet( { keys, onKeyboardClick } ) {
 
-    function handleClick(e) {
-        onKeyboardClick(e.target.name)
-        // onKeyboardClick(e.target)
-    }
+  function handleClick(e) {
+    onKeyboardClick(e.target.name)
+}
+
   return (
     keys.map((eachKey) => (
     <button onClick={handleClick} name={eachKey} key={eachKey} className="keyboard-key" id={`key-${eachKey}`}>
@@ -16,4 +16,4 @@ function KeyboardRow( { keys, onKeyboardClick } ) {
   )
 }
 
-export default KeyboardRow
+export default KeyboardKeySet
