@@ -16,7 +16,7 @@ function GameBoard( { guesses }) {
   return (
     <section className='gameboard'>
       {/* map over guesses array */}
-      <TileContainer guesses={guesses}>
+      <TileContainer guesses={guesses} color={color}>
         {/* pass in the guesses from a map */}
       </TileContainer>
     </section>

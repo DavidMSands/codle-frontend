@@ -16,7 +16,7 @@ function GameRow( { word } ) {
 
   return (
     <div className='tile'>
-      {word.map((letter, i) => <Tile key={i} letter={letter}/>)}
+      {word.map((letter, i) => <Tile key={i} letter={letter} color={color}/>)}
     </div>
   )
 }

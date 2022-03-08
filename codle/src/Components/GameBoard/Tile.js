@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from "styled-components"
 
-// TODO: refactor styled components into css
-const StyledTileDiv = styled.div`
+
+function Tile( { letter, color } ) {
+    const StyledTileDiv = styled.div`
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -12,14 +13,22 @@ const StyledTileDiv = styled.div`
     font-weight: bold;
     line-height: 3.2rem;
     text-transform: uppercase;
-`
+    ${() => {
+        if (color === "green") {
+          return `background-color: #6aaa64;`;
+        }
+        if (color === "yellow") {
+          return `background-color: #b59f3b;`;
+        }
+    }}
+    `
+            // console.log("color:", color, color === "green", color === "yellow");
 
-function Tile( { letter } ) {
-  return (
-    <StyledTileDiv>
-      {letter}
-    </StyledTileDiv>
-  )
+    return (
+        <StyledTileDiv >
+        {letter}
+        </StyledTileDiv>
+    )
 }
 
 export default Tile
