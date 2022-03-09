@@ -4,8 +4,7 @@ import KeyboardSuggestions from './KeyboardSuggestions'
 import "./keyboard.css"
 
 
-function Keyboard( { pressedKey, colors, guesses } ) {
-
+function Keyboard( { pressedKey, colors, guesses, wotd } ) {
   function handleClick(keyClicked){
     pressedKey(keyClicked)
   }
@@ -19,18 +18,18 @@ function Keyboard( { pressedKey, colors, guesses } ) {
   const allKeys = keyboardRows.flat()
 
   useEffect(() => {
-    const handleKeyUp = (e) => {
+    function handleKeyUp(e) {
       if (allKeys.includes(e.key.toLowerCase())) {
         handleClick(e.key.toLowerCase());
       }
-    };
+    }
 
     window.addEventListener("keyup", handleKeyUp);
 
     return () => {
       window.removeEventListener("keyup", handleKeyUp);
     };
-  }, []);
+  }, [wotd]);
 
 
   return (

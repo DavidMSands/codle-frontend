@@ -7,9 +7,9 @@ import Footer from './Components/Header/Footer';
 import styled from "styled-components"
 import { useState, useRef, useEffect } from 'react'
 
-const wordOfTheDay = 'hello'
 
 function App() {
+  const [wordOfTheDay, setWordOfTheDay] = useState('words')
   const [modalStyle, setModalStyle] =useState('score-container1')
   const [hide, setHide] = useState(true)
   const [guesses, setGuesses] = useState({
@@ -29,6 +29,12 @@ function App() {
     5: Array.from({ length: 5}).fill(""),
   })
 
+  useEffect(() => {
+    fetch('http://localhost:9292/word_otd')
+    .then(r => r.json())
+    .then(wod => setWordOfTheDay(wod[0].game_word.toLowerCase()))
+  }, [])
+
   function handleModalStyle() {
       setModalStyle('score-container2')
   }
@@ -44,17 +50,17 @@ function App() {
     // setGuesses(...guesses, keyClicked)
     enterGuess(keyClicked)
   }
-  const enterGuess = (keyClicked) => {
+  function enterGuess(keyClicked) {
     if (keyClicked === "enter") {
-      //potential TODO: validate users words before submitting in backen
+      //potential TODO: validate users words before submitting in backend
       submit()
     } else if (keyClicked.toLowerCase() === "backspace") {
       erase() 
-    } else if (keyClicked.toLowerCase() !== "enter") {
+    } else {
       publish(keyClicked)
     }
   }
-  const publish = (keyClicked) => {
+  function publish(keyClicked) {
     const currentLetterIndex = letterIndex.current
     const currentRound = round.current
 
@@ -69,7 +75,7 @@ function App() {
       letterIndex.current = currentLetterIndex + 1
     }
   }
-  function erase(){
+  function erase() {
     const currentLetterIndex = letterIndex.current
     const currentRound = round.current
     
@@ -83,16 +89,17 @@ function App() {
       letterIndex.current = currentLetterIndex - 1
     }
   }
-  function hideScore () {
+  function hideScore() {
     setHide(hide => !hide)
   }
 
-  const win = () => {
+  function win() {
     // document.removeEventListener('keyup', handleKeyUp)
     console.log('need to remove EL and open modal (david?)')
   }
 
-  const submit = () => {
+  // TODO: enter key versus keyboard key use previous state
+  function submit() {
     const currentRound = round.current
     const updatedMarkers = {...markers}
     const tempWord = wordOfTheDay.split("")
@@ -129,26 +136,19 @@ function App() {
           updatedMarkers[currentRound][index] = "#808080"
           tempWord[index] = ""
         }
-    })
+      })
 
     } 
-
     setMarkers(updatedMarkers)
-    // console.log(markers[gameRound][letterIndex])
-
-    // console.log(guesses[round][index])
     round.current = currentRound + 1
     letterIndex.current = 0
   }
-
-// LEFT OFF POINT: we need to pass down color as a prop to GameBoard so tile has access
-// We may need to access index in addition to color
 
   return (
     <div className="App">
       <Header handleModalStyle={handleModalStyle} />
       <GameBoard guesses={guesses} colors={markers}/>
-      <Keyboard pressedKey={pressedKey} guesses={guesses} colors={markers}/> 
+      <Keyboard pressedKey={pressedKey} guesses={guesses} colors={markers} wotd={wordOfTheDay}/> 
       <Score modalStyle={modalStyle} exitModal={exitModal} />
       <Footer /> 
     </div>
