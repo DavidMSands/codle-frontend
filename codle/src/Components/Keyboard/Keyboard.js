@@ -4,9 +4,19 @@ import KeyboardSuggestions from './KeyboardSuggestions'
 import "./keyboard.css"
 
 
-function Keyboard( { pressedKey, colors, guesses, wotd } ) {
+function Keyboard( { pressedKey, colors, guesses, wotd, round, modalStyle } ) {
+  console.log(modalStyle)
+
   function handleClick(keyClicked){
-    pressedKey(keyClicked)
+    console.log(modalStyle)
+    if (modalStyle === "score-container1"){
+      if (keyClicked.toLowerCase() !== "enter") {
+      pressedKey(keyClicked.toLowerCase());
+      }
+      else if (keyClicked.toLowerCase() === "enter" && guesses[round.current][0] !== "") {
+        pressedKey(keyClicked.toLowerCase())
+      }
+    } 
   }
 
   const keyboardRows = [
@@ -29,7 +39,7 @@ function Keyboard( { pressedKey, colors, guesses, wotd } ) {
     return () => {
       window.removeEventListener("keyup", handleKeyUp);
     };
-  }, [wotd]);
+  }, [wotd, modalStyle]);
 
 
   return (
