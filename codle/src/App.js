@@ -78,6 +78,11 @@ function App() {
     setHide(hide => !hide)
   }
 
+  const win = () => {
+    // document.removeEventListener('keyup', handleKeyUp)
+    console.log('need to remove EL and open modal (david?)')
+  }
+
   const submit = () => {
     const currentRound = round.current
     const updatedMarkers = {...markers}
@@ -89,12 +94,18 @@ function App() {
       const guessedLetter = guesses[currentRound][index]
 
       if (guessedLetter === letter) {
-        updatedMarkers[currentRound][index] = "#6aaa64"
+        updatedMarkers[currentRound][index] = "#6aaa64" //green
         tempWord[index] = "" //empty index before each iteration
       } else {
         leftOverIndices.push(index)
       }
     })
+
+    if (guesses[currentRound].join("") === wordOfTheDay) {
+      setMarkers(updatedMarkers)
+      win()
+      return
+    }
 
     // mark correct values with wrong index in yellow
     if (leftOverIndices.length) {
@@ -109,8 +120,9 @@ function App() {
           updatedMarkers[currentRound][index] = "#808080"
           tempWord[index] = ""
         }
-      })
-    }
+    })
+
+    } 
 
     setMarkers(updatedMarkers)
     // console.log(markers[gameRound][letterIndex])
@@ -119,8 +131,6 @@ function App() {
     round.current = currentRound + 1
     letterIndex.current = 0
   }
-
-  console.log(markers)
 
 // LEFT OFF POINT: we need to pass down color as a prop to GameBoard so tile has access
 // We may need to access index in addition to color
