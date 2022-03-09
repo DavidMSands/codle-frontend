@@ -10,6 +10,7 @@ import { useState, useRef, useEffect } from 'react'
 const wordOfTheDay = 'hello'
 
 function App() {
+  const [modalStyle, setModalStyle] =useState('score-container1')
   const [hide, setHide] = useState(true)
   const [guesses, setGuesses] = useState({
     0: Array.from({ length: 5}).fill(""),
@@ -27,6 +28,14 @@ function App() {
     4: Array.from({ length: 5}).fill(""),
     5: Array.from({ length: 5}).fill(""),
   })
+
+  function handleModalStyle() {
+      setModalStyle('score-container2')
+  }
+
+  function exitModal() {
+    setModalStyle('score-container1')
+  }
 
   let letterIndex = useRef(0)
   let round = useRef(0)
@@ -137,10 +146,9 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <button onClick={hideScore}>Hide</button>
+      <Header handleModalStyle={handleModalStyle} />
       <GameBoard guesses={guesses} colors={markers}/>
-      {hide ? <Score /> : null }
+      <Score modalStyle={modalStyle} exitModal={exitModal} />
       <Keyboard pressedKey={pressedKey} /> 
       <Footer /> 
     </div>
