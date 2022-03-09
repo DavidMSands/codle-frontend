@@ -4,9 +4,14 @@ import KeyboardSuggestions from './KeyboardSuggestions'
 import "./keyboard.css"
 
 
-function Keyboard( { pressedKey, colors, guesses, wotd } ) {
+function Keyboard( { pressedKey, colors, guesses, wotd, round } ) {
   function handleClick(keyClicked){
-    pressedKey(keyClicked)
+    if (keyClicked.toLowerCase() !== "enter") {
+    pressedKey(keyClicked.toLowerCase());
+    }
+    else if (keyClicked.toLowerCase() === "enter" && guesses[round.current][0] !== "") {
+      pressedKey(keyClicked.toLowerCase())
+    }
   }
 
   const keyboardRows = [
