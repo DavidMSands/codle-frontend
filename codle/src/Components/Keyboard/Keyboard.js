@@ -20,8 +20,8 @@ function Keyboard( { pressedKey } ) {
 
   useEffect(() => {
     const handleKeyUp = (e) => {
-      if (allKeys.includes(e.key)) {
-        handleClick(e.key);
+      if (allKeys.includes(e.key.toLowerCase())) {
+        handleClick(e.key.toLowerCase());
       }
     };
 

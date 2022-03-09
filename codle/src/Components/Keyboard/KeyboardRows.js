@@ -4,7 +4,7 @@ import KeyboardKeySet from './KeyboardKeySet'
 function KeyboardRows( { onKeyboardClick } ) {
     
     function handleClick(keyClicked) {
-        onKeyboardClick(keyClicked)
+        onKeyboardClick(keyClicked.toLowerCase())
     }
 
    //keyboard rows
