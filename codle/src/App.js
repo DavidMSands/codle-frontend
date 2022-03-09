@@ -148,8 +148,8 @@ function App() {
     <div className="App">
       <Header handleModalStyle={handleModalStyle} />
       <GameBoard guesses={guesses} colors={markers}/>
+      <Keyboard pressedKey={pressedKey} guesses={guesses} colors={markers}/> 
       <Score modalStyle={modalStyle} exitModal={exitModal} />
-      <Keyboard pressedKey={pressedKey} /> 
       <Footer /> 
     </div>
   );

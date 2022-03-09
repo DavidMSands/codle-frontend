@@ -4,7 +4,7 @@ import KeyboardSuggestions from './KeyboardSuggestions'
 import "./keyboard.css"
 
 
-function Keyboard( { pressedKey } ) {
+function Keyboard( { pressedKey, colors, guesses } ) {
 
   function handleClick(keyClicked){
     pressedKey(keyClicked)
@@ -20,8 +20,8 @@ function Keyboard( { pressedKey } ) {
 
   useEffect(() => {
     const handleKeyUp = (e) => {
-      if (allKeys.includes(e.key)) {
-        handleClick(e.key);
+      if (allKeys.includes(e.key.toLowerCase())) {
+        handleClick(e.key.toLowerCase());
       }
     };
 
@@ -34,7 +34,7 @@ function Keyboard( { pressedKey } ) {
 
 
   return (
-    <KeyboardRows onKeyboardClick={handleClick}/>
+    <KeyboardRows keyboardRows={keyboardRows} onKeyboardClick={handleClick} guesses={guesses} colors={colors}/>
   )
 }
 
