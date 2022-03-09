@@ -19,7 +19,8 @@ function KeyboardSuggestions( {letters} ) {
     // hold state for guesses tried
     // gameboard logic:
     // when user submits: check last guess against WOTD 
-    // if last guess includes
+    // if last guess includes the letter at correct index - bg color green
+    // if last guess includes the letter at incorrect index - bg color - dark
     
   return (
     <div>SuggestOff</div>

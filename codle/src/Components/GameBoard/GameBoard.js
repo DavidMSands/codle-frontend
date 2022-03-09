@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import TileContainer from './TileContainer'
 
 
-function GameBoard() {
+function GameBoard( { guesses, colors }) {
   const [words, setWords] = useState(['planc', 'argus']) //test starter array
 
   //TODO: in sinatra, only send words to frontend that are 5 characters long and lowercase all words
@@ -13,9 +13,14 @@ function GameBoard() {
     .then(data => setWords(data))
   }, [])
 
+  // console.log(colors)
+
   return (
     <section className='gameboard'>
-      <TileContainer></TileContainer>
+      {/* map over guesses array */}
+      <TileContainer guesses={guesses} colors={colors}>
+        {/* pass in the guesses from a map */}
+      </TileContainer>
     </section>
   )
 }
