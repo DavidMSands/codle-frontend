@@ -141,7 +141,7 @@ function App() {
       <button onClick={hideScore}>Hide</button>
       <GameBoard guesses={guesses} colors={markers}/>
       {hide ? <Score /> : null }
-      <Keyboard pressedKey={pressedKey} /> 
+      <Keyboard pressedKey={pressedKey} guesses={guesses} colors={markers}/> 
       <Footer /> 
     </div>
   );

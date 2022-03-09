@@ -4,7 +4,7 @@ import KeyboardSuggestions from './KeyboardSuggestions'
 import "./keyboard.css"
 
 
-function Keyboard( { pressedKey } ) {
+function Keyboard( { pressedKey, colors, guesses } ) {
 
   function handleClick(keyClicked){
     pressedKey(keyClicked)
@@ -34,7 +34,7 @@ function Keyboard( { pressedKey } ) {
 
 
   return (
-    <KeyboardRows onKeyboardClick={handleClick}/>
+    <KeyboardRows keyboardRows={keyboardRows} onKeyboardClick={handleClick} guesses={guesses} colors={colors}/>
   )
 }
 
