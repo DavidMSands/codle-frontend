@@ -8,18 +8,21 @@ import styled from "styled-components"
 import { useState } from 'react'
 
 function App() {
-  const [hide, setHide] = useState(true)
+  const [modalStyle, setModalStyle] =useState('score-container1')
 
-  function hideScore () {
-    setHide(hide => !hide)
+  function handleModalStyle() {
+      setModalStyle('score-container2')
+  }
+
+  function exitModal() {
+    setModalStyle('score-container1')
   }
 
   return (
     <div className="App">
-      <Header />
-      <button onClick={hideScore}>Hide</button>
+      <Header handleModalStyle={handleModalStyle} />
       <GameBoard />
-      {hide ? <Score /> : null }
+      <Score modalStyle={modalStyle} exitModal={exitModal} />
       <Keyboard /> 
       <Footer /> 
     </div>
