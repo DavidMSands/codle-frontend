@@ -6,7 +6,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1500px;
+  max-width: 500px;
   margin: 0 auto;
   /* background-image: linear-gradient(90deg, #464d55, #171c26); */
 }
@@ -38,7 +38,7 @@ body {
   border-radius: .33rem; 
   display: block;
   position: absolute; 
-  left: -165px;
+  left: -500px;
   top: 0;
   backdrop-filter: blur(2px);
 }
@@ -125,9 +125,12 @@ div#recent-scores ul {
 }
 
 #sugg-edit-btn {
-  right: 10px;
-  top: 0;
   width: 20px;
+  margin-top: .65rem;
+  border: none;
+  border-radius: 5px;
+  background-image: linear-gradient(180deg, #414850, #131720);
+  color: white;
 }
 
 #suggestions-ul {
@@ -149,6 +152,7 @@ button:hover {
   align-items: center;
   flex-grow: 1;
   padding-bottom: 40px;
+  margin-top: 40px;
 }
 
 .tile-container {
@@ -204,8 +208,35 @@ text-align: center;
   color: #6b6b6a;
 }
 
+.login-text:hover{
+  cursor: pointer;
+}
+
 .login-text-2 {
   font-size: .75rem;
   color: #000000;
   text-align: left;
+}
+
+#no-account {
+  font-size: .83rem;
+  color:rgb(135, 39, 39);
+}
+
+.login-button {
+  width: 50px;
+  margin-top: .65rem;
+  border: none;
+  border-radius: 5px;
+  background-image: linear-gradient(180deg, #414850, #131720);
+  color: white;
+}
+
+.signin-button {
+  width: 60px;
+  margin-top: .65rem;
+  border: none;
+  border-radius: 5px;
+  background-image: linear-gradient(180deg, #414850, #131720);
+  color: white;
 }
