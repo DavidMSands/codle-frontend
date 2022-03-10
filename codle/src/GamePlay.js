@@ -21,6 +21,7 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth }) {
   const [modalStyle, setModalStyle] =useState('score-container1')
   const [isEnter, setIsEnter] = useState(false)
   const [wordOfTheDay, setWordOfTheDay] = useState('hello')
+  const [isWin, setIsWin] = useState(false)
   const [guesses, setGuesses] = useState({
     0: Array.from({ length: 5}).fill(""),
     1: Array.from({ length: 5}).fill(""),
@@ -43,7 +44,7 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth }) {
     .then(r => r.json())
     .then(wotd => setWordOfTheDay(wotd[0].game_word.toLowerCase()))
   }, [])
-  console.log(wordOfTheDay)
+  // console.log(wordOfTheDay)
   function handleModalStyle() {
       setModalStyle('score-container2')
   }
@@ -105,6 +106,8 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth }) {
   const win = () => {
     // document.removeEventListener('keyup', handleKeyUp)
     console.log('need to remove EL and open modal (david?)')
+    setModalStyle('score-container2')
+    setIsWin(true)
   }
 
   const submit = () => {
@@ -165,7 +168,7 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth }) {
       <Header handleModalStyle={handleModalStyle} />
       <GameBoard guesses={guesses} colors={markers}/>
       <Keyboard pressedKey={pressedKey} guesses={guesses} colors={markers} isEnter={isEnter} modalStyle={modalStyle} round={round} wotd={wordOfTheDay}/> 
-      <Score modalStyle={modalStyle} exitModal={exitModal} userName={userName} sessionScore={sessionScore} lifetimeScore={lifetimeScore} />
+      <Score modalStyle={modalStyle} exitModal={exitModal} userName={userName} sessionScore={sessionScore} lifetimeScore={lifetimeScore} isWin={isWin} />
     </div>
   );
 }
