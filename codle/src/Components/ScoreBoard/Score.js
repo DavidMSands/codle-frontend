@@ -14,9 +14,8 @@ function reducer(state, action) {
 }
 
 
-function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore } ) {
+function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore, isWin } ) {
     const [state, dispatch] = useReducer(reducer, { count: 59 })
-    
     const [suggestedWord, setSuggestedWord] = useState('')
     const [suggestedWords, setSuggestedWords] = useState('')
     const [submit, setSubmit] = useState('')
@@ -113,14 +112,41 @@ function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore }
             return null
         }
     }
-    
 
+    const currentUser = {name: "jojo", score: 10}
+
+    function ShowGreetz() {
+        // if score === 0 then offer welcome greetz
+        // if score !== 0 && isWin is false offer encouragement
+        // else isWin true say you won
+        // isWin ? console.log( "isWin = true") : console.log("isWin = false")
+        if (isWin) {
+            return "Congratulations! You won" 
+        } else {
+            return "Keep Playing, you'll get it!"
+        }
+    }
+    function ShowGreetz2() {
+        // if score === 0 then offer welcome greetz
+        // if score !== 0 && isWin is false offer encouragement
+        // else isWin true say you won
+        // isWin ? console.log( "isWin = true") : console.log("isWin = false")
+        if (currentUser.score === 0) {
+            return "Welcome to Codle, the code-related word game!" 
+        } else if (currentUser.score !== 0 && isWin !== true) {
+            return "Keep Playing, you'll get it!"
+        } else {
+            return "Congratulations!  You won!"
+        }
+    }
+// console.log("isWin in Score " + isWin)
   return (
     <section id={modalStyle}>
         <div id="score-card">
             <h1 id="score-header">Codle</h1>
             <button className='modal-btn' id='score-x-button' onClick={exitModal}>X</button>
             <hr id='score-hr'/>
+            <p><ShowGreetz2 /></p>
             <ul id='score-list'>
                 <li><strong>User:</strong> {userName}  </li>
                 <li><strong>Game Score:</strong> {sessionScore} </li>
