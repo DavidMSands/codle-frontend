@@ -23,6 +23,22 @@ function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore, 
     const [submittedToday, setSubmittedToday] = useState(false)
     const [editWord, setEditWord] = useState('')
     const [isEdit, setIsEdit] = useState(false)
+    const [recentScores, setRecentScores] = useState([])
+
+    //get data for recent scores
+    useEffect(() => {
+        fetch('http://localhost:9292/users/6/recent')
+        .then(res => res.json())
+        .then(data => setRecentScores(Object.values(data)))
+    }, [])
+    //create li components for recent scores list
+    function RecentScoresList() {
+        return(
+            recentScores.map((score) => (
+                <li><strong>Date:</strong> {score.date} <strong>Word:</strong> {score.word} <strong>Score:</strong> {score.score}</li>
+            )
+        ))       
+    }
     
     //Initial post when word is submitted
     function handleSubmit(e) {
@@ -115,22 +131,8 @@ function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore, 
 
     const currentUser = {name: "jojo", score: 10}
 
-    function ShowGreetz() {
-        // if score === 0 then offer welcome greetz
-        // if score !== 0 && isWin is false offer encouragement
-        // else isWin true say you won
-        // isWin ? console.log( "isWin = true") : console.log("isWin = false")
-        if (isWin) {
-            return "Congratulations! You won" 
-        } else {
-            return "Keep Playing, you'll get it!"
-        }
-    }
+    //modify and use this version when current user object is passed in - currently using dummy data
     function ShowGreetz2() {
-        // if score === 0 then offer welcome greetz
-        // if score !== 0 && isWin is false offer encouragement
-        // else isWin true say you won
-        // isWin ? console.log( "isWin = true") : console.log("isWin = false")
         if (currentUser.score === 0) {
             return "Welcome to Codle, the code-related word game!" 
         } else if (currentUser.score !== 0 && isWin !== true) {
@@ -139,8 +141,8 @@ function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore, 
             return "Congratulations!  You won!"
         }
     }
-// console.log("isWin in Score " + isWin)
-  return (
+
+    return (
     <section id={modalStyle}>
         <div id="score-card">
             <h1 id="score-header">Codle</h1>
@@ -155,11 +157,7 @@ function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore, 
             <p id='recent'>Recent scores:</p>
             <div id='recent-scores'>
                 <ul>
-                    <li><strong>Date:</strong> 03/08/2022 <strong>Word:</strong> Ruby <strong>Score:</strong> 5</li>
-                    <li><strong>Date:</strong> 03/09/2022 <strong>Word:</strong> Ruby <strong>Score:</strong> 2</li>
-                    <li><strong>Date:</strong> 03/10/2022 <strong>Word:</strong> Ruby <strong>Score:</strong> 3</li>
-                    <li><strong>Date:</strong> 03/11/2022 <strong>Word:</strong> Ruby <strong>Score:</strong> 5</li>
-                    <li><strong>Date:</strong> 03/12/2022 <strong>Word:</strong> Ruby <strong>Score:</strong> 5</li>
+                    <RecentScoresList />
                 </ul>
             </div>
             <form onSubmit={handleSubmit}>
