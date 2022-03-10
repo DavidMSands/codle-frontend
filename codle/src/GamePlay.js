@@ -5,7 +5,7 @@ import Score from './Components/ScoreBoard/Score';
 import Footer from './Components/Header/Footer';
 import styled from "styled-components"
 import { useState, useRef, useEffect } from 'react'
-import Login from './Components/Login';
+import Login from './Components/Login/Login';
 import { useNavigate, Redirect } from "react-router-dom"
 
 const wordOfTheDay = 'hello'

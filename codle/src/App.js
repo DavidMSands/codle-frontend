@@ -1,5 +1,5 @@
 import './App.css';
-import Login from './Components/Login';
+import Login from './Components/Login/Login';
 import GamePlay from './GamePlay';
 import { Routes, Route } from "react-router-dom"
 import Header from './Components/Header/Header';
