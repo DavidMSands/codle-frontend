@@ -6,10 +6,14 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 500px;
+  max-width: 1500px;
   margin: 0 auto;
   /* background-image: linear-gradient(90deg, #464d55, #171c26); */
 
+}
+
+.app {
+  position: relative;
 }
 
 /* score card styling  */
@@ -35,7 +39,7 @@ body {
   border-radius: .33rem; 
   display: block;
   position: absolute; 
-  left: -500px;
+  left: -165px;
   top: 0;
   backdrop-filter: blur(2px);
 }
@@ -184,3 +188,24 @@ text-align: center;
  }
 
 
+/* login page styling */
+#login {
+  text-align: center;
+  line-height: 25px;
+}
+
+#login-hr {
+  width: 500px;
+  margin-bottom: 50px;
+}
+
+.login-text {
+  font-size: .75rem;
+  color: #6b6b6a;
+}
+
+.login-text-2 {
+  font-size: .75rem;
+  color: #000000;
+  text-align: left;
+}
