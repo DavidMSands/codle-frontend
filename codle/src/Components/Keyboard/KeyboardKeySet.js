@@ -8,11 +8,47 @@ function KeyboardKeySet( { keys, onKeyboardClick, colors, guesses, round, rowId 
   }
 const currentRound = round.current
 
-const keyColor = (eachKey) => {
-  const arr = guesses[currentRound].map((letter, i) => letter === eachKey ? colors[currentRound][i] : null)
-  const keyColor = arr.filter(el => el)
-  return keyColor[0]
+const colorIndex = guesses[currentRound].indexOf()
+
+function keyColor(eachKey) {
+  let colorsArr = []
+  for (let row in guesses) {
+    const arr = guesses[row].map((letter, i) => {
+      return {
+        letter: letter,
+        color: colors[row][i]
+      }
+    })
+    colorsArr.push(arr)
+  }
+
+  for (let row of colorsArr) {
+    for (let letterObj of row) {
+      // maybe make this a while loop so we don't stop at the first letter (we want the last occurance of the letter)
+      if (letterObj.letter === eachKey) {
+        return letterObj.color
+      }
+    }
+  }
+
+  // for (let row of colorsArr) {
+  //   for (let letterObj of row) {
+  //     if (letterObj.letter === eachKey) {
+  //       if (letterObj.color === '#6aaa64') {
+  //         return letterObj.color
+  //       } else if (letterObj.color === '#e4bc3f') {
+  //         return letterObj.color
+  //       } else {
+  //         return letterObj.color //'#808080'
+  //       }
+  //     }
+  //   }
+  // }
 }
+
+console.log(keyColor("e"))
+
+// `${keyColor(eachKey)}`
 
 return (
   keys[rowId].map((eachKey) => (
