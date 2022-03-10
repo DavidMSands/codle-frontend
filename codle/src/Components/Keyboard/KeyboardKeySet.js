@@ -7,27 +7,16 @@ function KeyboardKeySet( { keys, onKeyboardClick, colors, guesses, round, rowId 
     onKeyboardClick(e.target.name)
   }
 const currentRound = round.current
-// does guesses[currentround] include this key, if yes return markers 
-// colors at the same location as guesses[currentround]
-
 
 const keyColor = (eachKey) => {
-    
-  guesses[currentRound].map((letter, i) => {
-      console.log(letter + i)
-        if (letter !== eachKey) {
-          // console.log(colors[currentRound][i] + "," + guesses[currentRound][i])
-          console.log(letter + eachKey)
-          return colors[currentRound][i]
-        }
-    })
-    // console.log(guessColorArry)
+  const arr = guesses[currentRound].map((letter, i) => letter === eachKey ? colors[currentRound][i] : null)
+  const keyColor = arr.filter(el => el)
+  return keyColor[0]
 }
-// console.log(keyColor)
-// console.log(keyColor())
+
 return (
   keys[rowId].map((eachKey) => (
-    <button style={{backgroundColor: "#fff"}} onClick={handleClick} name={eachKey} key={eachKey} className="keyboard-key" id={`key-${eachKey}`} > 
+    <button style={{backgroundColor: `${keyColor(eachKey)}`}} onClick={handleClick} name={eachKey} key={eachKey} className="keyboard-key" id={`key-${eachKey}`} > 
         <KeyboardKey key={eachKey} eachKey={eachKey}/>
     </button>
   ))

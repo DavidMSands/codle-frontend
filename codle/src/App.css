@@ -96,7 +96,7 @@ div#recent-scores ul {
 }
 
 
-button {
+.modal-btn {
   margin-top: .65rem;
   border: none;
   border-radius: 5px;
@@ -145,6 +145,7 @@ button:hover {
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  padding-bottom: 40px;
 }
 
 .tile-container {
