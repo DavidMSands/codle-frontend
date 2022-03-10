@@ -21,6 +21,7 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth, currentUserObj,
   const [isEnter, setIsEnter] = useState(false)
   const [wordOfTheDay, setWordOfTheDay] = useState('hello')
   const [wordOfTheDayId, setwordOfTheDayId] = useState(0)
+  const [isWin, setIsWin] = useState(false)
   const [guesses, setGuesses] = useState({
     0: Array.from({ length: 5}).fill(""),
     1: Array.from({ length: 5}).fill(""),
@@ -46,7 +47,6 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth, currentUserObj,
       setWordOfTheDay(wotd[0].game_word.toLowerCase())
     })
   }, [])
-
 
   function handleModalStyle() {
       setModalStyle('score-container2')
@@ -158,6 +158,7 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth, currentUserObj,
         .then(data => console.log(data))
         setSessionScore(currentScore())
         setIsWin(true)
+        setModalStyle('score-container2')
   }
 
   
@@ -222,7 +223,7 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth, currentUserObj,
       <Header handleModalStyle={handleModalStyle} />
       <GameBoard guesses={guesses} colors={markers}/>
       <Keyboard pressedKey={pressedKey} guesses={guesses} colors={markers} isEnter={isEnter} modalStyle={modalStyle} round={round} wotd={wordOfTheDay}/> 
-      <Score modalStyle={modalStyle} exitModal={exitModal} userName={userName} sessionScore={sessionScore} lifetimeScore={lifetimeScore} currentScore={currentScore} />
+      <Score modalStyle={modalStyle} exitModal={exitModal} userName={userName} sessionScore={sessionScore} lifetimeScore={lifetimeScore} currentScore={currentScore} isWin={isWin} />
     </div>
   );
 }
