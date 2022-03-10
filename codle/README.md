@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# CODLE - the word guessing game for coders 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Contributors](https://img.shields.io/badge/contributors-3-brightgreen)](https://github.com/DavidMSands/codle-frontend/graphs/contributors)
 
-## Available Scripts
 
-In the project directory, you can run:
+Codle is a web based game built in Javascript React with a Ruby Sinatra SQLite3 database backend. 
 
-### `npm start`
+## Gameplay
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Gameplay is just like other Word (Wordle) type games.  Guess the letters, get hints from the colors, guess in 6 tries and share your results.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Color Indicators
+If you're new to Codle, the game uses three colors to indicate what's going on:
+- 🟩 Green means the letter is in the word, and in the correct position.
+- 🟨 Yellow means that the letter is in the word, but in the wrong position.
+- ⬛ Dark Grey means that the letter is not in the word
 
-### `npm test`
+### New Words
+Return each day for a new Codle word of the day! Our game currently resets the Word of the Day each 24 hour earth rorational cycle. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technology
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Javascript React Front End
+Game front end was built in Javascript React for user interactivity and dynamic styling of components. Specific React components utilized in the front end build include: [React Router Dom](https://github.com/remix-run/react-router).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Ruby with Sinatra and SQLite database
+Game backend is driven Ruby with Sinatra and served from an SQLite database.  Active Record makes the datamanagement simple.  Specific technologies used in the backend build include: [Sinatra](https://github.com/sinatra/sinatra), [Thin](https://github.com/macournoyer/thin), [ActiveRecord](https://github.com/rails/rails), [SQLite3](https://github.com/sparklemotion/sqlite3-ruby/).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## How to install
+---
+Go grab the back-end too!  Read install instructions there as well.
 
-### `npm run eject`
+Simply fork and clone this repo down
+run `npm install` and `npm run` to start up the app at `localhost:3000`. N.B. backend connections are set to `loalhost:9292`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Challenges faced
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Don't let the simple interface fool you, there is plenty going on under the hood. 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+One of the major challenges we faced was the logic of changing the tile colors - as well as the keyboard colors.  
 
-## Learn More
+Another challange was establishishing a simple login that would allow for gameplay without a full authentication suite, while holding the user in state during play.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
