@@ -14,6 +14,10 @@ text-transform: uppercase;
 `
 
 function Tile( { letter, colors, roundIndex, letterIndex} ) {
+
+
+    // console.log(colors[roundIndex][letterIndex])
+
     return (
         <StyledTileDiv style={{backgroundColor: colors[roundIndex][letterIndex]}}>
         {letter}

@@ -1,29 +1,33 @@
 import React from 'react'
 import KeyboardKey from './KeyboardKey'
 //take in the keys from each row and map them out to individual divs
-function KeyboardKeySet( { keys, onKeyboardClick, colors, guesses } ) {
+function KeyboardKeySet( { keys, onKeyboardClick, colors, guesses, round, rowId } ) {
 
   function handleClick(e) {
     onKeyboardClick(e.target.name)
+  }
+const currentRound = round.current
+// does guesses[currentround] include this key, if yes return markers 
+// colors at the same location as guesses[currentround]
+
+
+const keyColor = (eachKey) => {
+    
+  guesses[currentRound].map((letter, i) => {
+      console.log(letter + i)
+        if (letter !== eachKey) {
+          // console.log(colors[currentRound][i] + "," + guesses[currentRound][i])
+          console.log(letter + eachKey)
+          return colors[currentRound][i]
+        }
+    })
+    // console.log(guessColorArry)
 }
-
-const coolness = () => {console.log("yes match")}
-const nahhness = () => {console.log("no false")}
-
-// Object.values(guesses).map((word, i) => console.log(i + word))
-// Object.values(guesses).includes(eachKey)
-// for (let guess in guesses) {
-//   for (let letter of guess) {
-//     letter.includes(eachKey) ? coolness() : nahhness()
-//   }
-// }
-
+// console.log(keyColor)
+// console.log(keyColor())
 return (
-  keys.map((eachKey) => (
-    // if the letter is contained in guesses[roundIndex] 
-    // add the color from the corresponding location in the colors obj
-    // to each button
-    <button onClick={handleClick} name={eachKey} key={eachKey} className="keyboard-key" id={`key-${eachKey}`}>
+  keys[rowId].map((eachKey) => (
+    <button style={{backgroundColor: "#fff"}} onClick={handleClick} name={eachKey} key={eachKey} className="keyboard-key" id={`key-${eachKey}`} > 
         <KeyboardKey key={eachKey} eachKey={eachKey}/>
     </button>
   ))
