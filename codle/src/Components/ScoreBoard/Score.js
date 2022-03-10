@@ -132,7 +132,7 @@ function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore, 
     const currentUser = {name: "jojo", score: 10}
 
     //modify and use this version when current user object is passed in - currently using dummy data
-    function ShowGreetz2() {
+    function ShowGreeting() {
         if (currentUser.score === 0) {
             return "Welcome to Codle, the code-related word game!" 
         } else if (currentUser.score !== 0 && isWin !== true) {
@@ -148,7 +148,7 @@ function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore, 
             <h1 id="score-header">Codle</h1>
             <button className='modal-btn' id='score-x-button' onClick={exitModal}>X</button>
             <hr id='score-hr'/>
-            <p><ShowGreetz2 /></p>
+            <p><ShowGreeting /></p>
             <ul id='score-list'>
                 <li><strong>User:</strong> {userName}  </li>
                 <li><strong>Game Score:</strong> {sessionScore} </li>
