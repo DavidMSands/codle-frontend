@@ -4,14 +4,11 @@ import KeyboardSuggestions from './KeyboardSuggestions'
 import "./keyboard.css"
 
 
-function Keyboard( { pressedKey, colors, guesses, wotd, round, modalStyle } ) {
-  console.log(modalStyle)
-
+function Keyboard( { pressedKey, colors, guesses, wotd, round, modalStyle, isEnter } ) {
   function handleClick(keyClicked){
-    console.log(modalStyle)
     if (modalStyle === "score-container1"){
       if (keyClicked.toLowerCase() !== "enter") {
-      pressedKey(keyClicked.toLowerCase());
+        pressedKey(keyClicked.toLowerCase());
       }
       else if (keyClicked.toLowerCase() === "enter" && guesses[round.current][0] !== "") {
         pressedKey(keyClicked.toLowerCase())
@@ -43,7 +40,7 @@ function Keyboard( { pressedKey, colors, guesses, wotd, round, modalStyle } ) {
 
 
   return (
-    <KeyboardRows keyboardRows={keyboardRows} onKeyboardClick={handleClick} guesses={guesses} colors={colors}/>
+    <KeyboardRows keyboardRows={keyboardRows} onKeyboardClick={handleClick} guesses={guesses} colors={colors} round={round} isEnter={isEnter}/>
   )
 }
 

@@ -10,7 +10,7 @@ function App() {
   const [userName, setUserName] = useState('default')
   const [sessionScore, setSessionScore] = useState(0)
   const [lifetimeScore, setLifetimeScore] = useState(0)
-  const [auth, setAuth] = useState(false)
+  const [auth, setAuth] = useState(true)
 
 
   return (

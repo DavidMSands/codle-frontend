@@ -108,7 +108,7 @@ function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore }
 
     function LiDisplay() {
         if (suggestionLi !== null) {
-            return suggestionLi.map(word => (<li>{word} <button id='sugg-x-btn' onClick={handleDeleteRow}>X</button> <button id='sugg-edit-btn' onClick={handleEdit}><FaRegEdit size={11} /></button></li>))
+            return suggestionLi.map(word => (<li>{word} <button className='modal-btn' id='sugg-x-btn' onClick={handleDeleteRow}>X</button> <button id='sugg-edit-btn' onClick={handleEdit}><FaRegEdit size={11} /></button></li>))
         } else if (suggestionLi === null) {
             return null
         }
@@ -119,7 +119,7 @@ function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore }
     <section id={modalStyle}>
         <div id="score-card">
             <h1 id="score-header">Codle</h1>
-            <button id='score-x-button' onClick={exitModal}>X</button>
+            <button className='modal-btn' id='score-x-button' onClick={exitModal}>X</button>
             <hr id='score-hr'/>
             <ul id='score-list'>
                 <li><strong>User:</strong> {userName}  </li>
@@ -148,7 +148,7 @@ function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore }
                     onChange={(e) => setSuggestedWord(e.target.value)}
                     />
                 </div>
-                <button type="submit">Send</button>
+                <button className='modal-btn' type="submit">Send</button>
             </form>
             <ul id='suggestions-ul'>
                 {suggestionLi === null || submit === 'submit'
@@ -171,7 +171,7 @@ function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore }
                       value={editWord}
                       onChange={(e) => setEditWord(e.target.value)}
                     />
-                    <button type="submit">Submit</button>
+                    <button className='modal-btn' type="submit">Submit</button>
                     </form>
                     : <LiDisplay />
                 }
