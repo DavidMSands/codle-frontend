@@ -14,11 +14,9 @@ function reducer(state, action) {
 }
 
 
-function Score( { modalStyle, exitModal } ) {
+function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore } ) {
     const [state, dispatch] = useReducer(reducer, { count: 59 })
-    const [userName, setUserName] = useState('default')
-    const [sessionScore, setSessionScore] = useState(0)
-    const [lifetimeScore, setLifetimeScore] = useState(0)
+    
     const [suggestedWord, setSuggestedWord] = useState('')
     const [suggestedWords, setSuggestedWords] = useState('')
     const [submit, setSubmit] = useState('')
