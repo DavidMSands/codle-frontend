@@ -5,15 +5,10 @@ import "./keyboard.css"
 
 
 function Keyboard( { pressedKey, colors, guesses, wotd, round, modalStyle, isEnter } ) {
-  // console.log(modalStyle)
-
-// Object.values(guesses).includes(key)
-
   function handleClick(keyClicked){
-    // console.log(modalStyle)
     if (modalStyle === "score-container1"){
       if (keyClicked.toLowerCase() !== "enter") {
-      pressedKey(keyClicked.toLowerCase());
+        pressedKey(keyClicked.toLowerCase());
       }
       else if (keyClicked.toLowerCase() === "enter" && guesses[round.current][0] !== "") {
         pressedKey(keyClicked.toLowerCase())

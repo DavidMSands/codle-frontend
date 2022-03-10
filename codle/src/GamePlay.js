@@ -8,9 +8,6 @@ import { useState, useRef, useEffect } from 'react'
 import Login from './Components/Login';
 import { useNavigate, Redirect } from "react-router-dom"
 
-const wordOfTheDay = 'hello'
-
-
 function GamePlay({ userName, sessionScore, lifetimeScore, auth }) {
   let navigate = useNavigate()
 
@@ -22,7 +19,8 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth }) {
   },[])
   
   const [modalStyle, setModalStyle] =useState('score-container1')
-  const [hide, setHide] = useState(true)
+  const [isEnter, setIsEnter] = useState(false)
+  const [wordOfTheDay, setWordOfTheDay] = useState('hello')
   const [guesses, setGuesses] = useState({
     0: Array.from({ length: 5}).fill(""),
     1: Array.from({ length: 5}).fill(""),
@@ -40,6 +38,12 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth }) {
     5: Array.from({ length: 5}).fill(""),
   })
 
+  useEffect(() => {
+    fetch('http://localhost:9292/word_otd')
+    .then(r => r.json())
+    .then(wotd => setWordOfTheDay(wotd[0].game_word.toLowerCase()))
+  }, [])
+  console.log(wordOfTheDay)
   function handleModalStyle() {
       setModalStyle('score-container2')
   }
@@ -47,8 +51,6 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth }) {
   function exitModal() {
     setModalStyle('score-container1')
   }
-
-  console.log(modalStyle)
 
   let letterIndex = useRef(0)
   let round = useRef(0)
@@ -61,10 +63,13 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth }) {
     if (keyClicked === "enter") {
       //potential TODO: validate users words before submitting in backen
       submit()
+      setIsEnter(true)
     } else if (keyClicked.toLowerCase() === "backspace") {
       erase() 
+      setIsEnter(false)
     } else if (keyClicked.toLowerCase() !== "enter") {
       publish(keyClicked)
+      setIsEnter(false)
     }
   }
   const publish = (keyClicked) => {
@@ -96,9 +101,6 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth }) {
       letterIndex.current = currentLetterIndex - 1
     }
   }
-  function hideScore () {
-    setHide(hide => !hide)
-  }
 
   const win = () => {
     // document.removeEventListener('keyup', handleKeyUp)
@@ -123,6 +125,7 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth }) {
       }
     })
 
+    console.log(guesses[currentRound].join(""))
     if (guesses[currentRound].join("") === wordOfTheDay) {
       setMarkers(updatedMarkers)
       win()
@@ -161,7 +164,7 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth }) {
     <div className="App">
       <Header handleModalStyle={handleModalStyle} />
       <GameBoard guesses={guesses} colors={markers}/>
-      <Keyboard pressedKey={pressedKey} guesses={guesses} colors={markers}/> 
+      <Keyboard pressedKey={pressedKey} guesses={guesses} colors={markers} isEnter={isEnter} modalStyle={modalStyle} round={round} wotd={wordOfTheDay}/> 
       <Score modalStyle={modalStyle} exitModal={exitModal} userName={userName} sessionScore={sessionScore} lifetimeScore={lifetimeScore} />
     </div>
   );
