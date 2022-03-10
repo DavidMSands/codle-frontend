@@ -11,7 +11,7 @@ import { useState, useRef, useEffect } from 'react'
 function App() {
   const [wordOfTheDay, setWordOfTheDay] = useState('words')
   const [modalStyle, setModalStyle] =useState('score-container1')
-  const [hide, setHide] = useState(true)
+  const [isEnter, setIsEnter] = useState(false)
   const [guesses, setGuesses] = useState({
     0: Array.from({ length: 5}).fill(""),
     1: Array.from({ length: 5}).fill(""),
@@ -54,10 +54,13 @@ function App() {
     if (keyClicked === "enter") {
       //potential TODO: validate users words before submitting in backend
       submit()
+      setIsEnter(true)
     } else if (keyClicked.toLowerCase() === "backspace") {
-      erase() 
+      erase()
+      setIsEnter(false) 
     } else {
       publish(keyClicked)
+      setIsEnter(false)
     }
   }
   function publish(keyClicked) {
@@ -88,9 +91,6 @@ function App() {
       })
       letterIndex.current = currentLetterIndex - 1
     }
-  }
-  function hideScore() {
-    setHide(hide => !hide)
   }
 
   function win() {
@@ -148,7 +148,7 @@ function App() {
     <div className="App">
       <Header handleModalStyle={handleModalStyle} />
       <GameBoard guesses={guesses} colors={markers}/>
-      <Keyboard pressedKey={pressedKey} guesses={guesses} colors={markers} wotd={wordOfTheDay} round={round} modalStyle={modalStyle}/> 
+      <Keyboard pressedKey={pressedKey} guesses={guesses} colors={markers} wotd={wordOfTheDay} round={round} modalStyle={modalStyle} isEnter={isEnter}/> 
       <Score modalStyle={modalStyle} exitModal={exitModal} />
       <Footer /> 
     </div>

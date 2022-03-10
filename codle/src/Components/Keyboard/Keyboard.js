@@ -4,7 +4,7 @@ import KeyboardSuggestions from './KeyboardSuggestions'
 import "./keyboard.css"
 
 
-function Keyboard( { pressedKey, colors, guesses, wotd, round, modalStyle } ) {
+function Keyboard( { pressedKey, colors, guesses, wotd, round, modalStyle, isEnter } ) {
   // console.log(modalStyle)
 
 // Object.values(guesses).includes(key)
@@ -45,7 +45,7 @@ function Keyboard( { pressedKey, colors, guesses, wotd, round, modalStyle } ) {
 
 
   return (
-    <KeyboardRows keyboardRows={keyboardRows} onKeyboardClick={handleClick} guesses={guesses} colors={colors} round={round}/>
+    <KeyboardRows keyboardRows={keyboardRows} onKeyboardClick={handleClick} guesses={guesses} colors={colors} round={round} isEnter={isEnter}/>
   )
 }
 

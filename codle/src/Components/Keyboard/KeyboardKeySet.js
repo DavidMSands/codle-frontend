@@ -1,14 +1,11 @@
 import React from 'react'
 import KeyboardKey from './KeyboardKey'
 //take in the keys from each row and map them out to individual divs
-function KeyboardKeySet( { keys, onKeyboardClick, colors, guesses, round, rowId } ) {
+function KeyboardKeySet( { keys, onKeyboardClick, colors, guesses, round, rowId, isEnter } ) {
 
   function handleClick(e) {
     onKeyboardClick(e.target.name)
   }
-const currentRound = round.current
-
-const colorIndex = guesses[currentRound].indexOf()
 
 function keyColor(eachKey) {
   let colorsArr = []
@@ -19,34 +16,23 @@ function keyColor(eachKey) {
         color: colors[row][i]
       }
     })
-    colorsArr.push(arr)
-  }
-
-  for (let row of colorsArr) {
-    for (let letterObj of row) {
-      // maybe make this a while loop so we don't stop at the first letter (we want the last occurance of the letter)
-      if (letterObj.letter === eachKey) {
-        return letterObj.color
-      }
+    if (isEnter === true) {
+      colorsArr.unshift(arr)
     }
   }
 
-  // for (let row of colorsArr) {
-  //   for (let letterObj of row) {
-  //     if (letterObj.letter === eachKey) {
-  //       if (letterObj.color === '#6aaa64') {
-  //         return letterObj.color
-  //       } else if (letterObj.color === '#e4bc3f') {
-  //         return letterObj.color
-  //       } else {
-  //         return letterObj.color //'#808080'
-  //       }
-  //     }
-  //   }
-  // }
+  if (colorsArr[0]) {
+    for (let row of colorsArr) {
+      for (let letterObj of row) {
+        // console.log(letterObj.letter, letterObj.color)
+        // maybe make this a while loop so we don't stop at the first letter (we want the last occurance of the letter)
+        if (letterObj.letter === eachKey) {
+          return letterObj.color
+        }
+      }
+    }
+  }
 }
-
-console.log(keyColor("e"))
 
 // `${keyColor(eachKey)}`
 
