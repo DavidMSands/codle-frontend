@@ -14,9 +14,8 @@ function reducer(state, action) {
 }
 
 
-function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore } ) {
+function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore, currentScore } ) {
     const [state, dispatch] = useReducer(reducer, { count: 59 })
-    
     const [suggestedWord, setSuggestedWord] = useState('')
     const [suggestedWords, setSuggestedWords] = useState('')
     const [submit, setSubmit] = useState('')
@@ -124,7 +123,7 @@ function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore }
             <ul id='score-list'>
                 <li><strong>User:</strong> {userName}  </li>
                 <li><strong>Game Score:</strong> {sessionScore} </li>
-                <li><strong>Total Score:</strong> {lifetimeScore} </li>
+                <li><strong>Lifetime Score:</strong> {lifetimeScore} </li>
             </ul>
             <p id='recent'>Recent scores:</p>
             <div id='recent-scores'>

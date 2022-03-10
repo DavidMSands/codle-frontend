@@ -8,19 +8,19 @@ import { useState, useRef, useEffect } from 'react'
 import Login from './Components/Login/Login';
 import { useNavigate, Redirect } from "react-router-dom"
 
-function GamePlay({ userName, sessionScore, lifetimeScore, auth }) {
+function GamePlay({ userName, sessionScore, lifetimeScore, auth, currentUserObj, setSessionScore, setIsWin }) {
   let navigate = useNavigate()
 
   useEffect(() => {
     if(auth === false) {
       navigate('/')
     }
-  
   },[])
   
   const [modalStyle, setModalStyle] =useState('score-container1')
   const [isEnter, setIsEnter] = useState(false)
   const [wordOfTheDay, setWordOfTheDay] = useState('hello')
+  const [wordOfTheDayId, setwordOfTheDayId] = useState(0)
   const [guesses, setGuesses] = useState({
     0: Array.from({ length: 5}).fill(""),
     1: Array.from({ length: 5}).fill(""),
@@ -41,9 +41,13 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth }) {
   useEffect(() => {
     fetch('http://localhost:9292/word_otd')
     .then(r => r.json())
-    .then(wotd => setWordOfTheDay(wotd[0].game_word.toLowerCase()))
+    .then(wotd => {
+      setwordOfTheDayId(wotd[0].id)
+      setWordOfTheDay(wotd[0].game_word.toLowerCase())
+    })
   }, [])
-  console.log(wordOfTheDay)
+
+
   function handleModalStyle() {
       setModalStyle('score-container2')
   }
@@ -102,10 +106,61 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth }) {
     }
   }
 
-  const win = () => {
-    // document.removeEventListener('keyup', handleKeyUp)
-    console.log('need to remove EL and open modal (david?)')
+
+  function currentScore() {
+    switch (round.current) {
+      case 0:
+        return 50;
+      case 1:
+        return 40;
+      case 2:
+        return 30;
+      case 3:
+        return 20;
+      case 4:
+        return 10;
+      case 5:
+        return 0;
+      default:
+        return "error"
+    }
   }
+
+  console.log(wordOfTheDayId)
+
+  const win = () => {
+    console.log(wordOfTheDayId)
+    const newObj = {
+      user_id: currentUserObj.id,
+      word_id: wordOfTheDayId,
+      session_score: currentScore(),
+      guesses: round.current + 1 ,
+      completed: true
+    }
+    fetch('http://localhost:9292/users' + `/${currentUserObj.id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        highscore: lifetimeScore + currentScore(),
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
+
+    fetch('http://localhost:9292/scores', {
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newObj)
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        setSessionScore(currentScore())
+        setIsWin(true)
+  }
+
+  
 
   const submit = () => {
     const currentRound = round.current
@@ -128,6 +183,8 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth }) {
     console.log(guesses[currentRound].join(""))
     if (guesses[currentRound].join("") === wordOfTheDay) {
       setMarkers(updatedMarkers)
+      console.log(wordOfTheDayId)
+      console.log(wordOfTheDay)
       win()
       return
     }
@@ -165,7 +222,7 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth }) {
       <Header handleModalStyle={handleModalStyle} />
       <GameBoard guesses={guesses} colors={markers}/>
       <Keyboard pressedKey={pressedKey} guesses={guesses} colors={markers} isEnter={isEnter} modalStyle={modalStyle} round={round} wotd={wordOfTheDay}/> 
-      <Score modalStyle={modalStyle} exitModal={exitModal} userName={userName} sessionScore={sessionScore} lifetimeScore={lifetimeScore} />
+      <Score modalStyle={modalStyle} exitModal={exitModal} userName={userName} sessionScore={sessionScore} lifetimeScore={lifetimeScore} currentScore={currentScore} />
     </div>
   );
 }
