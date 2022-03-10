@@ -8,7 +8,7 @@ import { useState, useRef, useEffect } from 'react'
 import Login from './Components/Login/Login';
 import { useNavigate, Redirect } from "react-router-dom"
 
-function GamePlay({ userName, sessionScore, lifetimeScore, auth, currentUserObj, setSessionScore, setIsWin }) {
+function GamePlay({ userName, sessionScore, lifetimeScore, auth, currentUserObj, setSessionScore }) {
   let navigate = useNavigate()
 
   useEffect(() => {
