@@ -5,6 +5,8 @@
 
 Codle is a web based game built in Javascript React with a Ruby Sinatra SQLite3 database backend. 
 
+This port of the word game was created as a **Phase 4 Project** for the Flatiron School Software Engineering intensive program, Q1 2022.
+
 ## Gameplay
 ---
 
@@ -31,10 +33,12 @@ Game backend is driven Ruby with Sinatra and served from an SQLite database.  Ac
 
 ## How to install
 ---
-Go grab the back-end too!  Read install instructions there as well.
+Go grab the [back-end too](https://github.com/adelinealmanzar/phase-3-sinatra-react-project)!  Read install instructions there as well.
 
-Simply fork and clone this repo down
-run `npm install` and `npm run` to start up the app at `localhost:3000`. N.B. backend connections are set to `loalhost:9292`.
+- Simply fork and clone this repo down to your local machine.
+- Run `npm install` from terminal in the app directory to install dependences
+- Finally `npm run` from terminal in app directory to start up the app server at `localhost:3000`. 
+ - N.B. backend connections are set to `loalhost:9292`.
 
 
 ## Challenges faced

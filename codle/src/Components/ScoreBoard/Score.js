@@ -15,7 +15,7 @@ function reducer(state, action) {
 
 
 
-function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore, currentScore, isWin } ) {
+function Score( { modalStyle, exitModal, userName, userId, sessionScore, lifetimeScore, currentScore, isWin } ) {
     const [state, dispatch] = useReducer(reducer, { count: 59 })
     const [suggestedWord, setSuggestedWord] = useState('')
     const [suggestedWords, setSuggestedWords] = useState('')
@@ -28,7 +28,7 @@ function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore, 
 
     //get data for recent scores
     useEffect(() => {
-        fetch('http://localhost:9292/users/6/recent')
+        fetch(`http://localhost:9292/users/${userId}/recent`)
         .then(res => res.json())
         .then(data => setRecentScores(Object.values(data)))
     }, [])
@@ -130,18 +130,19 @@ function Score( { modalStyle, exitModal, userName, sessionScore, lifetimeScore, 
         }
     }
 
-    const currentUser = {name: "jojo", score: 10}
+  
 
     //modify and use this version when current user object is passed in - currently using dummy data
     function ShowGreeting() {
-        if (currentUser.score === 0) {
+        if (sessionScore === 0) {
             return "Welcome to Codle, the code-related word game!" 
-        } else if (currentUser.score !== 0 && isWin !== true) {
+        } else if (sessionScore !== 0 && isWin !== true) {
             return "Keep Playing, you'll get it!"
         } else {
             return "Congratulations!  You won!"
         }
     }
+
 
     return (
     <section id={modalStyle}>
