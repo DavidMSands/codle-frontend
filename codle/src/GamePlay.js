@@ -8,7 +8,7 @@ import { useState, useRef, useEffect } from 'react'
 import Login from './Components/Login/Login';
 import { useNavigate, Redirect } from "react-router-dom"
 
-function GamePlay({ userName, sessionScore, lifetimeScore, auth, currentUserObj, setSessionScore }) {
+function GamePlay({ userName, fetchRecentScores, sessionScore, setIsScoreWin, lifetimeScore, auth, currentUserObj, recentScores, setSessionScore }) {
   let navigate = useNavigate()
 
   useEffect(() => {
@@ -137,6 +137,7 @@ console.log(wordOfTheDay)
       guesses: round.current + 1 ,
       completed: true
     }
+    
     fetch('http://localhost:9292/users' + `/${currentUserObj.id}`, {
       method: 'PATCH',
       body: JSON.stringify({
@@ -158,7 +159,10 @@ console.log(wordOfTheDay)
         .then(data => console.log(data))
         setSessionScore(currentScore())
         setIsWin(true)
+        setIsScoreWin(true)
         setModalStyle('score-container2')
+        fetchRecentScores(currentUserObj)
+        
   }
 
   
@@ -218,12 +222,13 @@ console.log(wordOfTheDay)
 // LEFT OFF POINT: we need to pass down color as a prop to GameBoard so tile has access
 // We may need to access index in addition to color
 
+
   return (
     <div className="App">
       <Header handleModalStyle={handleModalStyle} />
       <GameBoard guesses={guesses} colors={markers}/>
       <Keyboard pressedKey={pressedKey} guesses={guesses} colors={markers} isEnter={isEnter} modalStyle={modalStyle} round={round} wotd={wordOfTheDay}/> 
-      <Score modalStyle={modalStyle} exitModal={exitModal} userName={userName} userId={currentUserObj.id} sessionScore={sessionScore} lifetimeScore={lifetimeScore} currentScore={currentScore} isWin={isWin} />
+      <Score modalStyle={modalStyle} recentScores={recentScores} exitModal={exitModal} userName={userName} userId={currentUserObj} sessionScore={sessionScore} lifetimeScore={lifetimeScore} currentScore={currentScore} isWin={isWin} />
     </div>
   );
 }
