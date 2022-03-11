@@ -38,7 +38,7 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth, currentUserObj,
     4: Array.from({ length: 5}).fill(""),
     5: Array.from({ length: 5}).fill(""),
   })
-
+console.log(wordOfTheDay)
   useEffect(() => {
     fetch('http://localhost:9292/word_otd')
     .then(r => r.json())
@@ -126,10 +126,10 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth, currentUserObj,
     }
   }
 
-  console.log(wordOfTheDayId)
+  // console.log(wordOfTheDayId)
 
   const win = () => {
-    console.log(wordOfTheDayId)
+    // console.log(wordOfTheDayId)
     const newObj = {
       user_id: currentUserObj.id,
       word_id: wordOfTheDayId,
@@ -223,7 +223,7 @@ function GamePlay({ userName, sessionScore, lifetimeScore, auth, currentUserObj,
       <Header handleModalStyle={handleModalStyle} />
       <GameBoard guesses={guesses} colors={markers}/>
       <Keyboard pressedKey={pressedKey} guesses={guesses} colors={markers} isEnter={isEnter} modalStyle={modalStyle} round={round} wotd={wordOfTheDay}/> 
-      <Score modalStyle={modalStyle} exitModal={exitModal} userName={userName} sessionScore={sessionScore} lifetimeScore={lifetimeScore} currentScore={currentScore} isWin={isWin} />
+      <Score modalStyle={modalStyle} exitModal={exitModal} userName={userName} userId={currentUserObj.id} sessionScore={sessionScore} lifetimeScore={lifetimeScore} currentScore={currentScore} isWin={isWin} />
     </div>
   );
 }
