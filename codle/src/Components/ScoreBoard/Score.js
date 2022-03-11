@@ -15,7 +15,7 @@ function reducer(state, action) {
 
 
 
-function Score( { modalStyle, exitModal, userName, userId, sessionScore, lifetimeScore, currentScore, isWin } ) {
+function Score( { modalStyle, exitModal, userName, recentScores, sessionScore, lifetimeScore, currentScore, isWin } ) {
     const [state, dispatch] = useReducer(reducer, { count: 59 })
     const [suggestedWord, setSuggestedWord] = useState('')
     const [suggestedWords, setSuggestedWords] = useState('')
@@ -24,15 +24,16 @@ function Score( { modalStyle, exitModal, userName, userId, sessionScore, lifetim
     const [submittedToday, setSubmittedToday] = useState(false)
     const [editWord, setEditWord] = useState('')
     const [isEdit, setIsEdit] = useState(false)
-    const [recentScores, setRecentScores] = useState([])
+
+    console.log(recentScores)
 
     //get data for recent scores
-    useEffect(() => {
-        fetch(`http://localhost:9292/users/${userId}/recent`)
-        .then(res => res.json())
-        .then(data => setRecentScores(Object.values(data)))
-    }, [])
-    //create li components for recent scores list
+    // useEffect(() => {
+    //     fetch(`http://localhost:9292/users/${userId.id}/recent`)
+    //     .then(res => res.json())
+    //     .then(data => setRecentScores(Object.values(data)))
+    // }, [])
+    // //create li components for recent scores list
     function RecentScoresList() {
         return(
             recentScores.map((score) => (

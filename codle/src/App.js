@@ -16,11 +16,12 @@ function App() {
   const [isNewUser, setIsNewUser] = useState(false)
   const [successfulLogin, setSuccessfulLogin] = useState(true)
   const [currentUserObj, setCurrentUserObj] = useState({})
-  const [isWin, setIsWin] = useState(false)
+  const [isScoreWin, setIsScoreWin] = useState(false)
+  const [recentScores, setRecentScores] = useState([])
 
   let navigate = useNavigate()
 
-  
+  console.log(recentScores)
 
   function handleSignUpSubmit(e) {
     e.preventDefault()
@@ -41,12 +42,17 @@ function App() {
             setCurrentUserObj(data)
             setUserName(data.username)
             setLifetimeScore(0)
-            
+            fetchRecentScores(data)
         })
         setAuth(true)
         navigate('/game-play')
 }
 
+function fetchRecentScores(data) {
+  fetch(`http://localhost:9292/users/${data.id}/recent`)
+  .then(res => res.json())
+  .then(data => setRecentScores(Object.values(data)))
+}
 
 function handleLogInSubmit(e) {
     e.preventDefault()
@@ -63,6 +69,7 @@ function handleLogInSubmit(e) {
           setAuth(true)
           setSuccessfulLogin(true)
           navigate('/game-play')
+          fetchRecentScores(currentUser[0])
       }
     })
 }
@@ -75,9 +82,10 @@ function handleLogInSubmit(e) {
           setCurrentUserObj(currentUser[0])
           setUserName(currentUser[0].username)
           setLifetimeScore(currentUser[0].highscore)
+          
       }
     )
-  }, [isWin])
+  }, [isScoreWin])
 
 
   return (
@@ -95,7 +103,7 @@ function handleLogInSubmit(e) {
         setPwd={setPwd}
         successfulLogin={successfulLogin}
         />} />
-        <Route exact path="/game-play" element={<GamePlay setIsWin={setIsWin} userName={userName} sessionScore={sessionScore} lifetimeScore={lifetimeScore} auth={auth} currentUserObj={currentUserObj} setSessionScore={setSessionScore} />} />
+        <Route exact path="/game-play" element={<GamePlay fetchRecentScores={fetchRecentScores} setIsScoreWin={setIsScoreWin} userName={userName} sessionScore={sessionScore} lifetimeScore={lifetimeScore} auth={auth} currentUserObj={currentUserObj} setSessionScore={setSessionScore} recentScores={recentScores} />} />
      </Routes>
     </div>
   );
